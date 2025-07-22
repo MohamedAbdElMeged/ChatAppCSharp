@@ -68,6 +68,7 @@ public class ChatApp
                 }
                 else
                 {
+                    ListAvailableChats();
                     List<string> options = new List<string>() { "Create New Chat","Open Existing Chat", "Q to Quit","L to Logout" };
                     
                     Dictionary<ConsoleKey, Action> actions = new Dictionary<ConsoleKey, Action>()
@@ -258,6 +259,27 @@ public class ChatApp
                 _userService.Login(emailInput,passwordInput);
                 
             }
+        }
+    }
+
+    public void ListAvailableChats()
+    {
+        Console.WriteLine("Your Available Chats");
+        var chats = InMemoryData.CurrentUser.Chats();
+        foreach (var chat in chats)
+        {
+            User chatParty = null;
+            var messages = _messageService.GetMessagesByChat(chat.Id);
+            var lastMessage = messages.LastOrDefault();
+            if (chat.FirstParty == InMemoryData.CurrentUser)
+            {
+                chatParty = chat.SecondParty;
+            }
+            else
+            {
+                chatParty = chat.FirstParty;
+            }
+            Console.WriteLine($"Email: {chatParty.Email}, Last Message: {lastMessage.Content} , At {lastMessage.TimeStamp.ToShortDateString()}, {lastMessage.TimeStamp.ToShortTimeString()} ");
         }
     }
  }
