@@ -279,7 +279,8 @@ public class ChatApp
             {
                 chatParty = chat.FirstParty;
             }
-            Console.WriteLine($"Email: {chatParty.Email}, Last Message: {lastMessage.Content} , At {lastMessage.TimeStamp.ToShortDateString()}, {lastMessage.TimeStamp.ToShortTimeString()} ");
+            
+            Console.WriteLine($"Email: {chatParty.Email} , Last Message: {lastMessage.Content} , At {lastMessage.TimeStamp.ToShortDateString()}, {lastMessage.TimeStamp.ToShortTimeString()} ");
         }
     }
  }
