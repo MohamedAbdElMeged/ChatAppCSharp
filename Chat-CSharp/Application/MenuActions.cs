@@ -22,8 +22,8 @@ public class MenuActions
     {
         Console.WriteLine("Please Enter you chat email buddy");
         var emailInput = Console.ReadLine();
-        if (String.IsNullOrEmpty(emailInput) || !_userService.IsEmailValid(emailInput) ||
-            (!String.IsNullOrEmpty(emailInput) && !_userService.IsUserExists(emailInput)))
+        if (!_userService.IsEmailValid(emailInput) ||
+            (!_userService.IsUserExists(emailInput)))
         {
             _uiHelper.PrintErrorMessage("you should add valid email");
         }
@@ -39,8 +39,8 @@ public class MenuActions
     {
         Console.WriteLine("Please enter email of your chat buddy");
         var emailInput = Console.ReadLine();
-        if (String.IsNullOrEmpty(emailInput) || !_userService.IsEmailValid(emailInput) ||
-            (!String.IsNullOrEmpty(emailInput) && !_userService.IsUserExists(emailInput)))
+        if (!_userService.IsEmailValid(emailInput) ||
+            (!_userService.IsUserExists(emailInput)))
         {
             _uiHelper.PrintErrorMessage("you should add valid email");
         }
@@ -66,7 +66,7 @@ public class MenuActions
     {
         Console.WriteLine("please enter your email");
         var emailInput = Console.ReadLine();
-        if (String.IsNullOrEmpty(emailInput) || !_userService.IsEmailValid(emailInput))
+        if (!_userService.IsEmailValid(emailInput))
         {
             _uiHelper.PrintErrorMessage("you should add valid email");
 
@@ -145,7 +145,7 @@ public class MenuActions
     {
         Console.WriteLine("please enter your email");
         var emailInput = Console.ReadLine();
-        if (String.IsNullOrEmpty(emailInput) || !_userService.IsEmailValid(emailInput))
+        if (!_userService.IsEmailValid(emailInput))
         {
             _uiHelper.PrintErrorMessage("you should add valid email");
         }
