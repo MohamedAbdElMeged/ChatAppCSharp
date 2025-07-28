@@ -11,10 +11,17 @@ class Program
     {
         Console.WriteLine("Welcome To Chat App");
         ChatApp chatApp = new ChatApp();
-
-        chatApp.Start();
-
-     // try catch inside each method in chat app
-
+        ApplicationDataSeeder.SeedMenuAndMenuActions();
+        if (!chatApp.DataExists())
+        {
+            ApplicationDataSeeder.SeedUserAndChats();
+        }
+        
+        bool starting = true;
+        while (starting)
+        {
+            starting = chatApp.Start();
+        }
+        
     }
 }
