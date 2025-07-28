@@ -8,6 +8,10 @@ public class UserService : IUserService
 {
     public bool IsUserExists(string email)
     {
+        if (!IsEmailValid(email))
+        {
+            return false;
+        }
         return InMemoryData.Users.Exists(u => u.Email.ToLower() == email.ToLower());
     }
 
@@ -57,6 +61,10 @@ public class UserService : IUserService
 
     public bool IsEmailValid(string email)
     {
+        if (String.IsNullOrEmpty(email) )
+        {
+            return false;
+        }
         return Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
     }
 }
