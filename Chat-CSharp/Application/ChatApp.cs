@@ -8,9 +8,6 @@ namespace Chat_CSharp.Application;
 public class ChatApp
 {
     private UiHelper _uiHelper = new UiHelper();
-    private IUserService _userService = new UserService();
-    private IChatService _chatService = new ChatService();
-    private IMessageService _messageService = new MessageService();
    
     public bool Start()
     {
