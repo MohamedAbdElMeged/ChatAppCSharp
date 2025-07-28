@@ -165,4 +165,10 @@ public class MenuActions
             }
         }
     }
+
+    public void QuitApp()
+    {
+        Console.WriteLine("Good Bye!");
+        Environment.Exit(0);
+    }
 }

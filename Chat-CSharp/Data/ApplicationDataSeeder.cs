@@ -54,6 +54,12 @@ public class ApplicationDataSeeder
                     Action = menuActions.LoginUi,
                     Key = ConsoleKey.D2,
                     Name = "Login"
+                },
+                new MenuItem()
+                {
+                    Action = menuActions.QuitApp,
+                    Key = ConsoleKey.Q,
+                    Name = "Quit"
                 }
             }
         };
@@ -74,6 +80,12 @@ public class ApplicationDataSeeder
                     Action = menuActions.LogoutUi,
                     Key = ConsoleKey.L,
                     Name = "Logout"
+                },
+                new MenuItem()
+                {
+                    Action = menuActions.QuitApp,
+                    Key = ConsoleKey.Q,
+                    Name = "Quit"
                 }
             }
         };
@@ -101,38 +113,15 @@ public class ApplicationDataSeeder
                     Action = menuActions.LogoutUi,
                     Key = ConsoleKey.L,
                     Name = "Logout"
+                },
+                new MenuItem()
+                {
+                    Action = menuActions.QuitApp,
+                    Key = ConsoleKey.Q,
+                    Name = "Quit"
                 }
             }
         };
-        
-        InMemoryData.Menus.Add(anonymousMenu);
-        InMemoryData.Menus.Add(loggedInWithOutChatsMenu);
-        InMemoryData.Menus.Add(loggedInWithChatsMenu);
-
-        // menu.Actions = new Dictionary<ConsoleKey, Action>()
-        // {
-        //     { ConsoleKey.D1,  menuActions.RegisterUi },
-        //     { ConsoleKey.D2,  menuActions.LoginUi },
-        //     { ConsoleKey.L,  menuActions.LogoutUi }
-        // };
-        // InMemoryData.Menus.Add(menu);
-        // menu = new Menu();
-        // menu.Name = "Logged In without Chats";
-        // menu.Actions = new Dictionary<ConsoleKey, Action>()
-        // {
-        //     { ConsoleKey.D1,  menuActions.CreateNewChatUi },
-        //     { ConsoleKey.L,  menuActions.LogoutUi }
-        // };
-        // InMemoryData.Menus.Add(menu);
-        // menu = new Menu();
-        // menu.Name = "Logged In with Chats";
-        // menu.Actions = new Dictionary<ConsoleKey, Action>()
-        // {
-        //     { ConsoleKey.D1,  menuActions.CreateNewChatUi },
-        //     { ConsoleKey.D2,  menuActions.OpenExistingChatUi },
-        //     { ConsoleKey.L,  menuActions.LogoutUi }
-        // };
-        // InMemoryData.Menus.Add(menu);
-
+        InMemoryData.Menus.AddRange(new List<Menu>(){anonymousMenu,loggedInWithChatsMenu,loggedInWithOutChatsMenu});
     }
 }

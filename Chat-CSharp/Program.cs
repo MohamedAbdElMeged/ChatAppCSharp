@@ -17,10 +17,10 @@ class Program
             ApplicationDataSeeder.SeedUserAndChats();
         }
         
-        bool starting = true;
-        while (starting)
+        bool running = true;
+        while (running)
         {
-            starting = chatApp.Start();
+            running = chatApp.Start();
         }
         
     }
