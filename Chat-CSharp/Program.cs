@@ -11,10 +11,28 @@ class Program
     {
         Console.WriteLine("Welcome To Chat App");
         ChatApp chatApp = new ChatApp();
+        ApplicationDataSeeder.SeedMenuAndMenuActions();
+        if (!chatApp.DataExists())
+        {
+            ApplicationDataSeeder.SeedUserAndChats();
+        }
 
-        chatApp.Start();
+        try
+        {
+            bool running = true;
+            while (running)
+            {
+                running = chatApp.Start();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(ex.Message);
+            Console.ResetColor();
+            
+        }
 
-     // try catch inside each method in chat app
-
+        
     }
 }

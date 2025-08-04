@@ -1,3 +1,5 @@
+using Chat_CSharp.Application;
+
 namespace Chat_CSharp.Utilities;
 
 public class UiHelper
@@ -17,15 +19,24 @@ public class UiHelper
         Console.WriteLine(message);
         Console.ResetColor();
     }
-
-    public void HandleOptions(Dictionary<ConsoleKey, Action> actions, List<string> options, string optionsName)
+    
+    
+    public void HandleOptions(Menu menu)
     {
-        ShowOptions(options, optionsName);
+        var options = menu.MenuItems.Select(m => m.Name).ToList();
+        var optionsName = menu.Name;
+        ShowOptions(options,optionsName);
         var key = Console.ReadKey(intercept: true).Key;
-        if (actions.ContainsKey(key))
+        var keys = menu.MenuItems.Select(m => m.Key).ToList();
+        if (keys.Exists(k=> k == key))
         {
 
-            actions[key]();
+            menu.MenuItems.First(m => m.Key == key).Action();
+        }
+        else
+        {
+            PrintErrorMessage("Invalid Input");
         }
     }
 }
+
