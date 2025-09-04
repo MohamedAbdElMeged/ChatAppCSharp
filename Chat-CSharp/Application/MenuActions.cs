@@ -101,7 +101,7 @@ public class MenuActions
     public void ListAvailableChats()
     {
         Console.WriteLine("Your Available Chats");
-        var chats = new List<Chat>();
+        var chats = _chatService.GetChatsByUserId(InMemoryData.CurrentUser.Id);
         foreach (var chat in chats)
         {
             
@@ -110,14 +110,14 @@ public class MenuActions
             User chatParty;
             if (chat.FirstParty == InMemoryData.CurrentUser)
             {
-                // chatParty = chat.SecondPartyId;
+                chatParty = _userService.GetUserById(chat.SecondPartyId);
             }
             else
             {
                 chatParty = chat.FirstParty;
             }
             
-            // Console.WriteLine($"Email: {chatParty.Email} , Last Message: {lastMessage.Content} , At {lastMessage.TimeStamp.ToShortDateString()}, {lastMessage.TimeStamp.ToShortTimeString()} ");
+            Console.WriteLine($"Email: {chatParty.Email} , Last Message: {lastMessage.Content} , At {lastMessage.TimeStamp.ToShortDateString()}, {lastMessage.TimeStamp.ToShortTimeString()} ");
         }
     }
     
@@ -128,7 +128,7 @@ public class MenuActions
         // current user cyan, second party magenta
         foreach (var message in messages)
         {
-            if (message.Sender == InMemoryData.CurrentUser)
+            if (message.SenderId == InMemoryData.CurrentUser.Id)
             {
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine($"{message.Content} , {message.TimeStamp.ToShortDateString()}, {message.TimeStamp.ToShortTimeString()}");

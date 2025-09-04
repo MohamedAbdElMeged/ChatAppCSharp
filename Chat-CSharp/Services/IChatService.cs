@@ -9,4 +9,5 @@ public interface IChatService
 
     public Chat GetChat(User firstParty, User secondParty);
     public bool IsChatExists(User firstParty, User secondParty);
+    public List<Chat> GetChatsByUserId(string userId);
 }

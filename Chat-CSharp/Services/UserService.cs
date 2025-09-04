@@ -76,4 +76,14 @@ public class UserService : IUserService
         }
         return Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
     }
+
+    public User GetUserById(string id)
+    {
+        return _context.Users.FirstOrDefault(u => u.Id == id);
+    }
+
+    public List<User> GetAll()
+    {
+        return _context.Users.ToList();
+    }
 }

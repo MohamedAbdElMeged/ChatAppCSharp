@@ -8,7 +8,9 @@ namespace Chat_CSharp.Application;
 public class ChatApp
 {
     private UiHelper _uiHelper = new UiHelper();
-   
+    private IChatService _chatService = new ChatService();
+    private IUserService _userService = new UserService();
+
     public bool Start()
     {
         if (InMemoryData.CurrentUser == null)
@@ -30,15 +32,14 @@ public class ChatApp
         return true;
     }
 
-    private static bool HasChats()
+    private bool HasChats()
     {
-        // return InMemoryData.CurrentUser.Chats().Count >= 1;
-        return true;
+        return _chatService.GetChatsByUserId(InMemoryData.CurrentUser.Id).Count >= 1;
     }
 
     public bool DataExists()
     {
-        return InMemoryData.Users.Count > 0;
+        return _userService.GetAll().Count >= 1;
     }
  }
  
