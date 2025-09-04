@@ -10,5 +10,7 @@ public interface IUserService
     public void AddUserInData(User user);
     public void Login(String email, String password);
     public bool IsEmailValid(string email);
+    public User GetUserById(string id);
 
+    public List<User> GetAll();
 }
