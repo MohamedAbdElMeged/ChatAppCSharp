@@ -6,18 +6,26 @@ namespace Chat_CSharp.Services;
 
 public class UserService : IUserService
 {
+    private readonly AppDbContext _context;
+
+    public UserService()
+    {
+        _context = new AppDbContext();
+    }
     public bool IsUserExists(string email)
     {
+
         if (!IsEmailValid(email))
         {
             return false;
         }
-        return InMemoryData.Users.Exists(u => u.Email.ToLower() == email.ToLower());
+        var user = _context.Users.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+        return user != null;
     }
 
     public User GetUser(string email)
     {
-        return InMemoryData.Users.First(u => u.Email.ToLower() == email.ToLower());
+        return _context.Users.First(u => u.Email.ToLower() == email.ToLower());
     }
 
     public void Register(String email, string password)
@@ -39,7 +47,8 @@ public class UserService : IUserService
 
     public void AddUserInData(User user)
     {
-        InMemoryData.Users.Add(user);
+      _context.Users.Add(user);
+      _context.SaveChanges();
     }
 
     public void Login(string email, string password)

@@ -9,30 +9,30 @@ public class ApplicationDataSeeder
 
     public static void SeedUserAndChats()
     {
-        User user1Test = new User("test@mo.com", password:"123456");
-        InMemoryData.Users.Add(user1Test);
-        User user2Test = new User("mo@mo.com", password:"123456");
-        InMemoryData.Users.Add(user2Test);
-        Chat chat = new Chat()
-        {
-            FirstParty = user1Test,
-            SecondParty = user2Test
-        };
-        InMemoryData.Chats.Add(chat);
-        Message message1 = new Message()
-        {
-            Content = "Hello! ",
-            Sender = user1Test,
-            ChatId = chat.Id
-        };
-        Message message2 = new Message()
-        {
-            Content = "Hello Too! ",
-            Sender = user2Test,
-            ChatId = chat.Id
-        };
-        InMemoryData.Messages.Add(message1);
-        InMemoryData.Messages.Add(message2);
+        // User user1Test = new User("test@mo.com", password:"123456");
+        // InMemoryData.Users.Add(user1Test);
+        // User user2Test = new User("mo@mo.com", password:"123456");
+        // InMemoryData.Users.Add(user2Test);
+        // Chat chat = new Chat()
+        // {
+        //     FirstParty = user1Test,
+        //     SecondParty = user2Test
+        // };
+        // InMemoryData.Chats.Add(chat);
+        // Message message1 = new Message()
+        // {
+        //     Content = "Hello! ",
+        //     Sender = user1Test,
+        //     ChatId = chat.Id
+        // };
+        // Message message2 = new Message()
+        // {
+        //     Content = "Hello Too! ",
+        //     Sender = user2Test,
+        //     ChatId = chat.Id
+        // };
+        // InMemoryData.Messages.Add(message1);
+        // InMemoryData.Messages.Add(message2);
     }
 
     public static void SeedMenuAndMenuActions()

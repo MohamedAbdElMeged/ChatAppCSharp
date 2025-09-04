@@ -7,6 +7,7 @@ namespace Chat_CSharp.Application;
 
 public class MenuActions
 {
+    
     private UiHelper _uiHelper = new UiHelper();
     private IUserService _userService = new UserService();
     private IChatService _chatService = new ChatService();
@@ -56,7 +57,7 @@ public class MenuActions
         var chat = _chatService.GetChat(chatId);
         Console.ForegroundColor = ConsoleColor.Cyan;
         ListOldMessagesForChat(chatId);
-        Console.WriteLine($"Chat Between {chat.FirstParty.Email} and {chat.SecondParty.Email} \n");
+        // Console.WriteLine($"Chat Between {chat.FirstParty.Email} and {chat.SecondParty.Email} \n");
         Console.ResetColor();
         Console.WriteLine("Start sending Messages..");
         var messageContent = Console.ReadLine();
@@ -100,7 +101,7 @@ public class MenuActions
     public void ListAvailableChats()
     {
         Console.WriteLine("Your Available Chats");
-        var chats = InMemoryData.CurrentUser.Chats();
+        var chats = new List<Chat>();
         foreach (var chat in chats)
         {
             
@@ -109,14 +110,14 @@ public class MenuActions
             User chatParty;
             if (chat.FirstParty == InMemoryData.CurrentUser)
             {
-                chatParty = chat.SecondParty;
+                // chatParty = chat.SecondPartyId;
             }
             else
             {
                 chatParty = chat.FirstParty;
             }
             
-            Console.WriteLine($"Email: {chatParty.Email} , Last Message: {lastMessage.Content} , At {lastMessage.TimeStamp.ToShortDateString()}, {lastMessage.TimeStamp.ToShortTimeString()} ");
+            // Console.WriteLine($"Email: {chatParty.Email} , Last Message: {lastMessage.Content} , At {lastMessage.TimeStamp.ToShortDateString()}, {lastMessage.TimeStamp.ToShortTimeString()} ");
         }
     }
     

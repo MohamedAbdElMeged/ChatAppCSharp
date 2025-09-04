@@ -5,8 +5,14 @@ namespace Chat_CSharp.Services;
 
 public class ChatService : IChatService
 {
+    private readonly AppDbContext _context;
+    public ChatService()
+    {
+        _context = new AppDbContext();
+    }
     public string CreateChat(User secondParty)
     {
+       
         var firstParty = InMemoryData.CurrentUser;
         if (IsChatExists(firstParty,secondParty))
         {
@@ -14,16 +20,18 @@ public class ChatService : IChatService
         }
         var chat = new Chat()
         {
-            FirstParty = firstParty,
-            SecondParty = secondParty
+            FirstPartyId = firstParty.Id,
+            SecondPartyId = secondParty.Id
         };
-        InMemoryData.Chats.Add(chat);
+        _context.Chats.Add(chat);
+        _context.SaveChanges();
+        
         return chat.Id;
     }
 
     public Chat GetChat(String chatId)
     {
-        return InMemoryData.Chats.First(c => c.Id.ToString() == chatId);
+        return _context.Chats.First(c => c.Id == chatId);
     }
 
     public Chat GetChat(User firstParty,User secondParty)
@@ -32,13 +40,18 @@ public class ChatService : IChatService
         {
             throw new Exception("Chat not found");
         }
-        return InMemoryData.Chats.First(c =>  (c.FirstParty == firstParty && c.SecondParty == secondParty) || 
-                                              (c.FirstParty == secondParty && c.SecondParty == firstParty));
+        return _context.Chats.First(c =>
+            c.FirstPartyId == firstParty.Id && c.SecondPartyId == secondParty.Id ||
+            (c.FirstPartyId == secondParty.Id && c.SecondPartyId == firstParty.Id));
     }
 
     public bool IsChatExists(User firstParty, User secondParty)
     {
-        return InMemoryData.Chats.Exists(c => (c.FirstParty == firstParty && c.SecondParty == secondParty) || 
-                                              (c.FirstParty == secondParty && c.SecondParty == firstParty)    );
+        // return InMemoryData.Chats.Exists(c => (c.FirstParty == firstParty && c.SecondParty == secondParty) || 
+        //                                       (c.FirstParty == secondParty && c.SecondParty == firstParty)    );
+        var chat = _context.Chats.FirstOrDefault(c =>
+            c.FirstPartyId == firstParty.Id && c.SecondPartyId == secondParty.Id ||
+            (c.FirstPartyId == secondParty.Id && c.SecondPartyId == firstParty.Id));
+        return chat != null;
     }
 }

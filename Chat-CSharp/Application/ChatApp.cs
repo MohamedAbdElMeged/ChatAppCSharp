@@ -32,7 +32,8 @@ public class ChatApp
 
     private static bool HasChats()
     {
-        return InMemoryData.CurrentUser.Chats().Count >= 1;
+        // return InMemoryData.CurrentUser.Chats().Count >= 1;
+        return true;
     }
 
     public bool DataExists()

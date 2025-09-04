@@ -5,22 +5,26 @@ namespace Chat_CSharp.Services;
 
 public class MessageService : IMessageService
 {
-
-    private ChatService _chatService;
+    private readonly AppDbContext _context;
+    public MessageService()
+    {
+        _context = new AppDbContext();
+    }
     public Message CreateMessage(string chatId, string content)
     {
         Message message = new Message()
         {
             ChatId = chatId,
             Content = content,
-            Sender = InMemoryData.CurrentUser
+            SenderId = InMemoryData.CurrentUser.Id
         };
-        InMemoryData.Messages.Add(message);
+        _context.Messages.Add(message);
+        _context.SaveChanges();
         return message;
     }
 
     public List<Message> GetMessagesByChat(string chatId)
     {
-        return InMemoryData.Messages.Where(m => m.ChatId == chatId).OrderBy(m => m.TimeStamp).ToList();
+        return _context.Messages.Where(m => m.ChatId == chatId).OrderBy(m => m.TimeStamp).ToList();
     }
 }

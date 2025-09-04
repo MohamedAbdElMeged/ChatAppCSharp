@@ -4,7 +4,7 @@ namespace Chat_CSharp.Utilities;
 
 public class UiHelper
 {
-    public void ShowOptions(List<string> options, string optionsName)
+    private void ShowOptions(List<string> options, string optionsName)
     {
         Console.WriteLine($"{optionsName} \n");
         for(int i = 0; i < options.Count; i++)
